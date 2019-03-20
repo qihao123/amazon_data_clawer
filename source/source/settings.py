@@ -13,7 +13,7 @@ BOT_NAME = 'source'
 
 SPIDER_MODULES = ['source.spiders']
 NEWSPIDER_MODULE = 'source.spiders'
-
+ITEM_PIPELINES = {'source.pipelines.JsonWithEncodingPipeline':300}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'source (+http://www.yourdomain.com)'
