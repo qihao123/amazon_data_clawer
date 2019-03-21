@@ -9,10 +9,10 @@ from source.items import sourceItem
 import scrapy
 
 class AmazonItemsInfo(scrapy.Spider):
-	name = "items"
-    allowed_domains = ["amazon.com", "www.amazon.com"]
+	name = "amazon"
+    allowed_domains = ["amazon.cn","www.amazon.cn"]
     start_urls = [
-        u'https://www.amazon.cn/s/ref=sr_pg_2?rh=n%3A116087071%2Ck%3A电子书阅读器&page=1&keywords=电子书阅读器&ie=UTF8&qid=1552999294'
+        'https://www.amazon.cn/s/ref=sr_pg_2?rh=n%3A116087071%2Ck%3A电子书阅读器&page=1&keywords=电子书阅读器&ie=UTF8&qid=1552999294'
     ]
 
     def parse(self, response):
@@ -30,9 +30,8 @@ class AmazonItemsInfo(scrapy.Spider):
             source['url'] = Selector(text = site).xpath("//li/div/div[2]/div/div[2]/div[1]/div[1]/@href")
             source['itemsid'] = Selector(text = site).xpath("//li/div/div[2]/div/div[2]/div[2]/div[2]/div[1]/span/@name")
             source['star'] = Selector(text = site).xpath("//li/div/div[2]/div/div[2]/div[2]/div[2]/div[1]/span/span/a/i[1]/span/text()")
-            source['comments_url'] = Selector(text = site).xpath("")
-            source['comments_number'] = Selector(text = site).xpath("")
+            source['comments_number'] = Selector(text = site).xpath("//li/div/div[2]/div/div[2]/div[2]/div[2]/div[1]/a/text()")
+            items.append(source)
         return items
     def _process_request(self,request):
-        retrurn request
-        https://www.amazon.cn/product-reviews/B07746N2J9/ref=acr_search_see_all?ie=UTF8&showViewpoints=1
+        return request
